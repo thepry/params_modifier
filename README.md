@@ -22,7 +22,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a param filter class and use `parameter` method, which requires 2 attributes: parameter name and block, which returns new value for this parameters.
+
+```ruby
+  # app/param_filters/user_params_filter.rb
+  class UserParamsFilter < ParamsModifier::Base
+   parameter(:email) { |value| value.downcase }
+  end
+```
+
+Then call filter method on `ActionController::Parameters` and pass your filter class to it.
+
+```ruby
+  # app/controllers/users_controller.rb
+  def user_params
+    params.require(:user).permit(:name, :email).filter(UserParamsFilter)
+  end
+```
 
 ## Development
 
@@ -32,7 +48,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/params_modifier. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/thepry/params_modifier. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
