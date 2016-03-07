@@ -27,7 +27,7 @@ Create a param filter class and use `parameter` method, which requires 2 attribu
 ```ruby
   # app/param_filters/user_params_filter.rb
   class UserParamsFilter < ParamsModifier::Base
-   parameter(:email) { |value| value.downcase }
+    parameter(:email) { |value| value.downcase }
   end
 ```
 
